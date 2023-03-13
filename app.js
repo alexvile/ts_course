@@ -1,9 +1,42 @@
-var button = document.querySelector("button");
-var input1 = document.getElementById("num1");
-var input2 = document.getElementById("num2");
-function add(num1, num2) {
-    return num1 + num2;
+var age;
+age = 50;
+var name1;
+name1 = "Max";
+var toggle;
+toggle = true;
+var notInitialize;
+notInitialize = undefined;
+var callback;
+callback = function (a) { return 100 + a; };
+var anything;
+anything = -20;
+anything = "Text";
+anything = {};
+var some;
+some = 'Abc';
+var str;
+if (typeof some === 'string') {
+    str = some;
 }
-button.addEventListener("click", function () {
-    console.log(add(+input1.value, +input2.value));
-});
+var person;
+person = ['Max', 21];
+var Status;
+(function (Status) {
+    Status[Status["LOADING"] = 0] = "LOADING";
+    Status[Status["READY"] = 1] = "READY";
+})(Status || (Status = {}));
+;
+var man = {
+    state: Status.READY
+};
+var union;
+union = 500;
+union = 'false';
+var literal;
+literal = 'disable';
+literal = 'enable';
+function showMessage(message) {
+    console.log(message);
+}
+;
+showMessage(3);
