@@ -1,0 +1,24 @@
+{
+  "name": "ts_course",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexvile/ts_course.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexvile/ts_course/issues"
+  },
+  "homepage": "https://github.com/alexvile/ts_course#readme",
+  "dependencies": {
+    "lite-server": "^2.6.1"
+  }
+}
