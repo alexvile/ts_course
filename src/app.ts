@@ -1,6 +1,6 @@
 class House {
   private tenants: string[] = [];
-  constructor(private street: string, public readonly type: string) {}
+  constructor(protected street: string, public readonly type: string) {}
   public showAddress(this: House): void {
     console.log("Address " + this.street);
   }
@@ -18,8 +18,11 @@ class House {
 class StoneHouse extends House {
   private chargeOfTheHouse: string;
   constructor(street: string, general: string) {
-    super("stone", street);
+    super(street, "stone");
     this.chargeOfTheHouse = general;
+  }
+  public showAddress(): void {
+    console.log("Address " + this.street);
   }
   public showTenants() {
     console.log("General: " + this.chargeOfTheHouse);
@@ -31,3 +34,4 @@ stoneHouse.addTenant("Anton");
 stoneHouse.addTenant("Jake");
 console.log(stoneHouse);
 stoneHouse.showTenants();
+stoneHouse.showAddress();
