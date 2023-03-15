@@ -1,15 +1,29 @@
 interface IPerson {
-  name: string;
+  readonly name: string;
   age: number;
   greet(phrase: string): void;
 }
 
-let user: IPerson;
+interface IPilot {
+  flyMessage(): void;
+}
+class Pilot implements IPerson, IPilot {
+  constructor(public readonly name: string, public age: number) {
+    this.checkAge();
+  }
+  private checkAge() {
+    if (this.age < 20) {
+      throw new Error("Pilot too young");
+    }
+  }
+  greet(phrase: string): void {
+    console.log(phrase + this.name);
+  }
+  flyMessage(): void {
+    console.log("Samolet letit");
+  }
+}
 
-user = {
-  name: "Max",
-  age: 12,
-  greet() {
-    console.log("Hello." + this.name);
-  },
-};
+const pilot = new Pilot("Max", 32);
+pilot.greet("Hello from cap");
+pilot.flyMessage();
