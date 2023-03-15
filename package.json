@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc -watch & lite-server"
+    "start": "tsc -watch & lite-server",
+    "server": "lite-server",
+    "build": "tsc -w"
   },
   "repository": {
     "type": "git",
