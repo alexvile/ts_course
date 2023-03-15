@@ -1,98 +1,60 @@
-let age:number;
-age=50;
-
-let name1:string;
-name1="Max";
-
-let toggle:boolean;
-toggle = true;
-
-let notInitialize:undefined;
-notInitialize=undefined;
-
-let callback: (a: number) => number;
-
-callback = (a) => {return 100 + a};
-
-let anything:any;
-
-anything= -20;
-anything="Text";
-anything={};
-
-let some:unknown;
-some = 'Abc';
-
-let str: string;
-if(typeof some === 'string') {
-    str = some;
+// class UseStatic {
+//   private static count = 0;
+//   constructor() {
+//     UseStatic.count += 1;
+//   }
+//   public showCount() {
+//     console.log(UseStatic.count);
+//   }
+// }
+class Key {
+  private signature: number;
+  constructor() {
+    this.signature = Math.random();
+  }
+  getSignature(): number {
+    return this.signature;
+  }
 }
 
-let person:[string, number];
-person = ['Max', 21];
-
-enum Status {LOADING, READY};
-
-const page = {
-    load: Status.READY,
+class Person {
+  constructor(private key: Key) {}
+  getKey(): Key {
+    return this.key;
+  }
 }
-if (page.load === Status.LOADING) {
-    console.log('Страница загружается');
-  }
-  if (page.load === Status.READY) {
-    console.log('Страница загружена');
-  }
 
-let union: string | number;
-union = 500;
-union = 'false';
+abstract class Home {
+  protected door = false;
+  protected tenants: Person[] = [];
+  constructor(protected key: Key) {}
 
-
-let literal: 'enable' | "disable";
-literal = 'disable';
-literal = 'enable';
-
-function showMessage(message:number):void {
-    console.log(message);
-};
-
- showMessage(3);
-
- function calc(num1:number, num2:number):number {
-    return num1 + num2;
- };
-
- calc(1,3);
-
- function customError():never {
-    throw new Error('Error');
- }
-
- type Page = {
-    title: String,
-    likes: number,
-    accounts: string[],
-    status: 'open' | 'close',
-    details?:{
-        createAt: string,
-        updateAt: string
+  comeIn(person: Person): void {
+    if (!this.door) {
+      throw new Error("Door closed !!");
     }
- }
 
- const page1:Page = {
-    title: 'The awesome page',
-    likes: 100,
-    accounts: ['Max', 'Anton', 'Nikita'],
-    status: 'open',
-    details: {
-      createAt: '2021-01-01',
-      updateAt: '2021-05-01',
+    this.tenants.push(person);
+    console.log("Person inside");
+  }
+
+  abstract openDoor(key: Key): boolean;
+}
+
+class MyHouse extends Home {
+  openDoor(key: Key) {
+    if (key.getSignature() !== this.key.getSignature()) {
+      throw new Error("Key to another door");
     }
+    return (this.door = true);
   }
-  
-  const page2:Page = {
-    title: 'Python or Js',
-    likes: 5,
-    accounts: ['Alex'],
-    status: 'close',
-  }
+}
+const key = new Key();
+console.log(key);
+const person = new Person(key);
+console.log(person);
+const house = new MyHouse(key);
+console.log(house);
+house.openDoor(person.getKey());
+
+house.comeIn(person);
