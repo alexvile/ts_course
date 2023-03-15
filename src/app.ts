@@ -1,37 +1,40 @@
-class House {
-  private tenants: string[] = [];
-  constructor(protected street: string, public readonly type: string) {}
-  public showAddress(this: House): void {
-    console.log("Address " + this.street);
+// class UseStatic {
+//   private static count = 0;
+//   constructor() {
+//     UseStatic.count += 1;
+//   }
+//   public showCount() {
+//     console.log(UseStatic.count);
+//   }
+// }
+
+abstract class Plane {
+  protected pilotInCabin = false;
+
+  public sitInPlane() {
+    this.pilotInCabin = true;
   }
-  public showType(this: House): void {
-    console.log("Type " + this.type);
-  }
-  public addTenant(name: string) {
-    this.tenants.push(name);
-  }
-  public showTenants(): void {
-    console.log(this.tenants);
+
+  public abstract startEngine(): string;
+}
+
+class Meize extends Plane {
+  public startEngine(): string {
+    return "ta-ta-ta";
   }
 }
 
-class StoneHouse extends House {
-  private chargeOfTheHouse: string;
-  constructor(street: string, general: string) {
-    super(street, "stone");
-    this.chargeOfTheHouse = general;
-  }
-  public showAddress(): void {
-    console.log("Address " + this.street);
-  }
-  public showTenants() {
-    console.log("General: " + this.chargeOfTheHouse);
-    super.showTenants();
+class Boeing extends Plane {
+  public startEngine(): string {
+    return "wuuuu";
   }
 }
-const stoneHouse = new StoneHouse("green walley", "Max");
-stoneHouse.addTenant("Anton");
-stoneHouse.addTenant("Jake");
-console.log(stoneHouse);
-stoneHouse.showTenants();
-stoneHouse.showAddress();
+
+const meize = new Meize();
+const boening = new Boeing();
+
+// meize.sitInPlane();
+// boening.sitInPlane();
+
+console.log(meize.startEngine());
+console.log(boening.startEngine());
