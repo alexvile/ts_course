@@ -7,34 +7,54 @@
 //     console.log(UseStatic.count);
 //   }
 // }
-
-abstract class Plane {
-  protected pilotInCabin = false;
-
-  public sitInPlane() {
-    this.pilotInCabin = true;
+class Key {
+  private signature: number;
+  constructor() {
+    this.signature = Math.random();
   }
-
-  public abstract startEngine(): string;
-}
-
-class Meize extends Plane {
-  public startEngine(): string {
-    return "ta-ta-ta";
+  getSignature(): number {
+    return this.signature;
   }
 }
 
-class Boeing extends Plane {
-  public startEngine(): string {
-    return "wuuuu";
+class Person {
+  constructor(private key: Key) {}
+  getKey(): Key {
+    return this.key;
   }
 }
 
-const meize = new Meize();
-const boening = new Boeing();
+abstract class Home {
+  protected door = false;
+  protected tenants: Person[] = [];
+  constructor(protected key: Key) {}
 
-// meize.sitInPlane();
-// boening.sitInPlane();
+  comeIn(person: Person): void {
+    if (!this.door) {
+      throw new Error("Door closed !!");
+    }
 
-console.log(meize.startEngine());
-console.log(boening.startEngine());
+    this.tenants.push(person);
+    console.log("Person inside");
+  }
+
+  abstract openDoor(key: Key): boolean;
+}
+
+class MyHouse extends Home {
+  openDoor(key: Key) {
+    if (key.getSignature() !== this.key.getSignature()) {
+      throw new Error("Key to another door");
+    }
+    return (this.door = true);
+  }
+}
+const key = new Key();
+console.log(key);
+const person = new Person(key);
+console.log(person);
+const house = new MyHouse(key);
+console.log(house);
+house.openDoor(person.getKey());
+
+house.comeIn(person);

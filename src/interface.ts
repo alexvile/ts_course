@@ -25,5 +25,3 @@ class Pilot implements IPerson, IPilot {
 }
 
 const pilot = new Pilot("Max", 32);
-pilot.greet("Hello from cap");
-pilot.flyMessage();
